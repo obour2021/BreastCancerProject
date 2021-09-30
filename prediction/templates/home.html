@@ -1,0 +1,172 @@
+{% extends "base.html" %} {% load static %} {% load crispy_forms_tags %}
+{% block main %}
+<style>
+    body {
+    font-family: "Oxygen", sans-serif;
+    margin: 0;
+  }
+  
+  input,
+  select {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 3px;
+   
+  }
+  
+  hr {
+    margin: 30px 0;
+  }
+  
+  .navbar {
+    display: flex;
+    width: 100%;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    padding: 8px 0;
+    color: #1557ff;
+    margin-right: 15px;
+  }
+  
+  .navbar a:hover,
+  .navbar .current-page {
+    border-bottom: solid 4px #1557ff;
+    border-spacing: 0 15px;
+    font-weight: bold;
+  }
+  
+  .title {
+    font-size: 2.5em;
+    padding: 0px 50px 0 20px;
+    margin: auto 0;
+    color: #3a10e5;
+  }
+  
+  main {
+    padding: 40px;
+  }
+  
+  main h2 {
+    font-size: 2em;
+  }
+  
+  .app {
+    min-width: 800px;
+    max-width: 60%;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    height: 650px;
+    
+  }
+  
+  li + div {
+    display: none;
+  }
+  
+  li:hover {
+    background-color: lightblue;
+  }
+  
+  li:hover + div {
+    display: inline-block;
+    background-color: white;
+    padding: 5px;
+    margin-left: 0px;
+    font-size: 0.8em;
+    color: dodgerblue;
+    border: 2px dashed lightblue;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  
+  main form input[type="submit"] {
+    width: max-content;
+  }
+  
+  main form * {
+    display: inline-block;
+  }
+  
+  main form label {
+    font-size: 1em;
+    font-weight: bold;
+    padding-top: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #1557ff;
+  }
+  a:hover {
+    font-weight: bold;
+  }
+
+  .form-group{
+    padding-left: 25px;
+    width: 95%;
+  }
+  button{
+    width: 100px;
+    height: 50px;
+    margin-left: 25px;
+    padding-left: 25px;
+    display: inline-block
+  }
+  
+</style>
+<div class="app">
+    <div>
+        <div>
+          <h1 class="title">Breast Cancer Recurrence</h1>
+            <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.age|as_crispy_field }}
+                       </div>
+                       <div class="form-group col-md-6 mb-0">
+                           {{ form.menopause|as_crispy_field }}
+                       </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.tumor_size|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.inv_nodes|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.node_caps|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.breast|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.breast_quad|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.irradiat|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="deg_malig">Deg Malignancy</label>
+                    <input type="number" step="0.1" class="form-control" name="deg_malig" placeholder="Range (1-3)" required>
+                </div>
+                <div class="container">
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

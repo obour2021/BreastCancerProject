@@ -1,0 +1,84 @@
+
+{% load static %} 
+<head>
+ <style>
+   
+#store{
+    border: 2px solid gray;
+    height: auto;
+    width: 100%;
+    text-align: center;  
+    line-height: 30px;
+}
+#store td{
+    padding: 2px 2px;
+    text-align: center;
+    word-wrap:break-word;
+    
+}
+#store tr:nth-child(even) {
+  background-color: #AAAAAA;
+}
+#store td:nth-child(2){
+  text-align: center;
+
+}
+#store td:nth-child(3){
+  text-align: center;
+
+}
+#store th:nth-child(2){
+  text-align: center;
+
+}
+#store th:nth-child(3){
+  text-align: center;
+
+}
+a{
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+ </style>
+</head>
+
+{% block main %}
+
+    <a href="{% url 'home' %}">Home</a> / <a href="{% url 'logout' %}">Logout</a>
+    
+    <h2>Predictions Database</h2>
+    <table id="store">
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Menopause</th>
+                <th>Tumor Size</th>
+                <th>Inv Nodes</th>
+                <th>Node Caps</th>
+                <th>Degree Malignancy</th>
+                <th>Breast</th>
+                <th>Breast Quadrant</th>
+                <th>Irradiation</th>
+                <th>Classification</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for classification in object_list %}
+            <tr>
+              <td>{{ classification.age }}</td>
+              <td>{{ classification.menopause }}</td>
+              <td>{{ classification.tumor_size }}</td>
+              <td>{{ classification.inv_nodes }}</td>
+              <td>{{ classification.node_caps }}</td>
+              <td>{{ classification.deg_malig }}</td>
+              <td>{{ classification.breast }}</td>
+              <td>{{ classification.breast_quad }}</td>
+              <td>{{ classification.irradiat }}</td>
+              <td>{{ classification.classification }}</td>                  
+            </tr>
+          {% endfor %}
+       
+        </tbody>
+    </table>
+
+{% endblock %}
